@@ -1,30 +1,16 @@
 const express = require('express');
 const app = express();
 const hbs = require("hbs");
+const router = require('./config/routes.config');
+
+app.use(router);
+app.use(express.static("public"));
 
 app.set('view engine', 'hbs');
 app.set('views', `${__dirname}/views`);
 
-app.use(express.static("public"));
+hbs.registerPartials(__dirname + "/views/partials");
 
-hbs.registerPartials(__dirname + "/views/partials")
-
-
-app.get('/', (req, res, next) => {
-    res.render('home');
-})
-
-app.get('/about', (req, res, next) => {
-    res.render('about');
-})
-
-app.get('/works', (req, res, next) => {
-    res.render('works');
-})
-
-app.get('/gallery', (req, res, next) => {
-    res.render('gallery');
-})
 
 
 const port = 3000;
